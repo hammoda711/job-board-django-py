@@ -1,1 +1,1 @@
-# first_django
+# Job Board Poject with Django
