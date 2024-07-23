@@ -35,3 +35,9 @@
 ## Home
 
 ## login(accounts)
+
+
+# django relations
+one to many [user - posts] --> Foriegnkey
+many to many [users - groups]
+one to one [user - profile]
