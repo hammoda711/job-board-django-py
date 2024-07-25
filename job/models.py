@@ -5,6 +5,17 @@ JOB_TYPE = (
     ('Full Time','Full Time'),
     ('Part Time','Part Time'),
 )
+
+
+
+def image_upload(instance,file_name):
+    extention = file_name.split('.')[-1]
+    return "jobs/%s.%s" % (instance.id,extention)
+
+
+
+
+
 # Create your models here.
 class Job(models.Model):
     title=models.CharField(max_length=100)
@@ -16,8 +27,8 @@ class Job(models.Model):
     salary = models.IntegerField(default=0)
     experience = models.IntegerField(default=1) 
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
-
-
+    image = models.ImageField(upload_to = image_upload)
+    #is_favorite = models.BooleanField(default=False)
 
 
 
