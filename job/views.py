@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 def available_jobs(request):
     available_jobs = Job.objects.all()
-    paginator = Paginator(available_jobs, 1)  # Show 25 contacts per page.
+    paginator = Paginator(available_jobs, 1)  # Show 1 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
@@ -18,8 +18,8 @@ def available_jobs(request):
 
 
 
-def job_details(request,id):
-    job_details = Job.objects.get(id=id)
+def job_details(request,slug):
+    job_details = Job.objects.get(slug=slug)
     context = {
         'job_details':job_details
     }
