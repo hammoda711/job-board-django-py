@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from django.shortcuts import redirect
 
 urlpatterns = [
+    #accounts before the admin
+    path('accounts/', include('django.contrib.auth.urls')), 
     path('admin/', admin.site.urls),
     path('jobs/', include('job.urls',namespace = 'jobs')),
     path('', lambda request: redirect('jobs:available_jobs')), 

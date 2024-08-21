@@ -3,6 +3,7 @@ from .models import Job
 from django.core.paginator import Paginator
 from .forms import ApplyForm,PostJobForm
 from django.urls import reverse
+#from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -24,6 +25,7 @@ def available_jobs(request):
 
 def job_details(request,slug):
     job_details = Job.objects.get(slug=slug)
+    #job_details = get_object_or_404(Job, slug=slug)
 
     if request.method == 'POST':
         form = ApplyForm(request.POST,request.FILES)
