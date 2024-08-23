@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # we move accounts to be before the admin
     'home',
     'bootstrap4',
+    #installed packges
 ]
 
 MIDDLEWARE = [
