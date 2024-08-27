@@ -9,8 +9,8 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     city = models.ForeignKey('City', related_name='user_city', on_delete=models.CASCADE , blank=True, null=True)
-    phone_number = models.CharField(max_length=17)
-    image = models.ImageField(upload_to='profile/')
+    phone_number = models.CharField(max_length=17,blank=True, null=True)
+    image = models.ImageField(upload_to='profile/',blank=True, null=True)
 
     def __str__(self):
         return str(self.user)
