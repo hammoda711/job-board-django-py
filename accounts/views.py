@@ -31,11 +31,11 @@ def profile_edit(request):
     
     
     if request.method=='POST':
-        userform = UserForm(request.POST,instance=request.user)
-        profileform = ProfileForm(request.POST,request.FILES,instance=profile )
-        if userform.is_valid() and profileform.is_valid():
-            userform.save()
-            myprofile = profileform.save(commit=False)
+        user_form = UserForm(request.POST,instance=request.user)
+        profile_form = ProfileForm(request.POST,request.FILES,instance=profile )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            myprofile = profile_form.save(commit=False)
             myprofile.user = request.user
             myprofile.save()
             return redirect(reverse('accounts:profile'))
