@@ -54,13 +54,10 @@
                         </div>
                         <div class="apply_job_form white-bg">
                             <h4>Apply for the job</h4>
-                            <form method= "POST", enctype="multipart/form-data">
-                                <form method="post" class="form">
+                            <form method="post" action="{% url 'jobs:apply_for_job' job_details.slug %}">
                                 {% csrf_token %}
-                                {% bootstrap_form form %}
-                                {% buttons %}
-                                <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
-                                {% endbuttons %}
+                                {{ form.as_p }}
+                                <button type="submit" class="boxed-btn3">Apply Now</button>
                             </form>
                         </div>
                     </div>
@@ -88,39 +85,10 @@
                                 <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
                             </ul>
                         </div>
-                        <div class="job_location_wrap">
-                            <div class="job_lok_inner">
-                                <div id="map" style="height: 200px;"></div>
-                                <script>
-                                function initMap() {
-                                    var uluru = {lat: -25.363, lng: 131.044};
-                                    var grayStyles = [
-                                    {
-                                        featureType: "all",
-                                        stylers: [
-                                        { saturation: -90 },
-                                        { lightness: 50 }
-                                        ]
-                                    },
-                                    {elementType: 'labels.text.fill', stylers: [{color: '#ccdee9'}]}
-                                    ];
-                                    var map = new google.maps.Map(document.getElementById('map'), {
-                                    center: {lat: -31.197, lng: 150.744},
-                                    zoom: 9,
-                                    styles: grayStyles,
-                                    scrollwheel:  false
-                                    });
-                                }
-                                
-                                </script>
-                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
-                                
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
     {% endblock body %}
-    <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+    

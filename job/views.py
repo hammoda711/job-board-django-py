@@ -3,7 +3,7 @@ from .models import Job
 from django.core.paginator import Paginator
 from .forms import ApplyForm,PostJobForm
 from django.urls import reverse
-#from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .filters import JobFilter
 
@@ -32,25 +32,27 @@ def available_jobs(request):
     return render(request,'job/available_jobs.html',context)
 
 
-
+#@login_required
 def job_details(request,slug):
-    job_details = Job.objects.get(slug=slug)
+    job = Job.objects.get(slug=slug)
     #job_details = get_object_or_404(Job, slug=slug)
-
+    '''
     if request.method == 'POST':
         form = ApplyForm(request.POST,request.FILES)
         if form.is_valid():
             myform = form.save(commit=False)
-            myform.job = job_details
+            myform.job = job
+            myform.user=request.user
             myform.save()
+            return redirect('job:job_details')
     else:
         form= ApplyForm
-    
+    '''
     
     
     context = {
-        'job_details':job_details,
-        'form': form
+        'job_details':job,
+        #'form': form
     }
     return render(request,'job/job_details.html',context)
 
@@ -70,3 +72,23 @@ def add_job(request):
 
     context={'form': form}
     return render(request,'job/add_job.html',context)
+
+
+
+@login_required
+def apply_for_job(request, slug):
+    job = get_object_or_404(Job, slug=slug)
+
+    if request.method == 'POST':
+        form = ApplyForm(request.POST,request.FILES)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.job = job
+            application.user = request.user
+            application.save()
+             # Redirect to the job details page after successful application
+            return redirect(reverse('jobs:job_details', kwargs={'slug': job.slug}))
+    else:
+        form = ApplyForm()
+
+    return render(request, 'job/apply_for_job.html', {'form': form, 'job': job})

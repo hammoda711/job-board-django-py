@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% load bootstrap4 %}
+{% block content %}
+  <h2>Apply for {{ job.title }}</h2>
+
+  <div class="apply_job_form white-bg">
+    
+    <h4>Apply For this Job</h4>
+    
+    <form method= "POST" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button class="boxed-btn3 w-100" type="submit">Apply now</button>
+        {% endbuttons %}
+    </form>
+</div>
+
+  <p><a href="{% url 'jobs:job_details' job.slug %}">Back to job details</a></p>
+{% endblock %}

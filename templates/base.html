@@ -45,7 +45,7 @@
                             <div class="col-xl-3 col-lg-2">
                                 <div class="logo">
                                     <a href="index.html">
-                                        <img src="img/logo.png" alt="">
+                                        <img src="{% static 'img/logo.png' %}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="/">home</a></li>
-                                            <li><a href="{% url 'jobs:available_jobs' %}">Browse Job</a></li>
-                                            <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+                                            <li><a href="{% url 'jobs:available_jobs' %}">Explore Jobs</a></li>
+                                            <li><a href="{% url 'contact:contact' %}">Contact Us</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -74,8 +74,11 @@
                                     {% endif %}
                                         
                                     
-                                    <div class="d-none d-lg-block">
+                                    <div class="d-none d-lg-block" style="margin-right: 10px;">
                                         <a class="boxed-btn3" href="{% url 'jobs:add_job' %}">Post a Job</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="{% url 'accounts:signup' %}">Sign Up</a>
                                     </div>
                                 </div>
                             </div>

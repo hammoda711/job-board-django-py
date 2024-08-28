@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="bradcam_text">
-                            <h3> {{ available_jobs.count }}+ Jobs Available</h3>
+                            <h3> {{ available_jobs.object_list.count }}+ Jobs Available</h3>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,9 @@
                                     <div class="single_jobs white-bg d-flex justify-content-between">
                                         <div class="jobs_left d-flex align-items-center">
                                             <div class="thumb">
+                                                {% if job.image %}
                                                 <img src="img/svg_icon/1.svg" alt="">
+                                                {% endif %}
                                             </div>
                                             <div class="jobs_conetent">
                                                 <a href="{% url 'jobs:job_details' job.slug %}"><h4> {{ job }} </h4></a>
