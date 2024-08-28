@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'job',
     'blog',
     'contact',
-    # we move accounts to be before the admin
+    # we move accounts app to be before the admin app
     'home',
-    'bootstrap4',
+    
     #installed packges
+    'bootstrap4',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

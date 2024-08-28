@@ -4,20 +4,30 @@ from django.core.paginator import Paginator
 from .forms import ApplyForm,PostJobForm
 from django.urls import reverse
 #from django.shortcuts import get_object_or_404
-
+from django.contrib.auth.decorators import login_required
+from .filters import JobFilter
 
 # Create your views here.
 
 
 
 def available_jobs(request):
+    
     available_jobs = Job.objects.all()
-    paginator = Paginator(available_jobs, 3)  # Show 1 contacts per page.
+   
+    # Filter jobs based on the request's query parameters
+    myfilter = JobFilter(request.GET, queryset=available_jobs)
+    available_jobs = myfilter.qs
+
+    # Paginate the filtered jobs, showing 3 jobs per page
+    paginator = Paginator(available_jobs, 3)  
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
+    # Pass the paginated and filtered jobs and the filter itself to the template
     context = {
-        'available_jobs':page_obj
+        'available_jobs':page_obj,
+        'myfilter': myfilter
     }   
     return render(request,'job/available_jobs.html',context)
 
@@ -45,7 +55,7 @@ def job_details(request,slug):
     return render(request,'job/job_details.html',context)
 
 
-
+@login_required
 def add_job(request):
     if request.method == 'POST':
         form = PostJobForm(request.POST,request.FILES)
