@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Info
+from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
@@ -18,5 +19,6 @@ def send_message(request):
             email,
             [settings.EMAIL_HOST_USER],
         )
+        return redirect(reverse ('jobs:available_jobs'))
 
     return render(request,'contact/contact.html',{'myinfo':myinfo})
