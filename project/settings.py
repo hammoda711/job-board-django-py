@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     #my apps
     'job',
     'contact',
-    # we move accounts app to be before the admin app
-    'home',
+    'blog',
+    
+    
     
     #installed packges
     'bootstrap4',

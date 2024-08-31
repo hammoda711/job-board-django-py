@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import SignupForm,UserForm,ProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from .models import Profile
+from django.views.decorators.http import require_http_methods
 # Create your views here.
 
 
@@ -45,3 +46,8 @@ def profile_edit(request):
 
     return render(request, 'accounts/profile_edit.html',{'user_form':user_form ,'profile_form': profile_form} ) 
 
+'''@require_http_methods(["GET", "POST"])
+def logout_view(request):
+    logout(request)  
+    return redirect('login')
+    '''

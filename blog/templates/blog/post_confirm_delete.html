@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        
+                      <h1>Delete: {{ post.title }}?</h1>
+                      <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-edit" style=" background-color: #4CAF50;">Confirm</button>
+                      </form>
+                      <a href="{% url 'blog:post_list' %}" class="btn btn-edit" style=" background-color: #4CAF50;">Cancel</a>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- Sidebar elements here -->
+                    <div class="blog_right_sidebar">
+                        <!-- Search widget, Categories, Recent Posts, etc. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
