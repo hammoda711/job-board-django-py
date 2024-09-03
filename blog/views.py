@@ -13,6 +13,8 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
+
+#Combining CBVs and Mixins
 class PostCreateView(LoginRequiredMixin,CreateView):
     model = Post
     template_name = 'blog/post_form.html'

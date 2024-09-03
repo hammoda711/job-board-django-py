@@ -29,6 +29,8 @@ urlpatterns = [
     path('', lambda request: redirect('jobs:available_jobs')),
     path('contact-us/', include('contact.urls',namespace = 'contact')),
     path('blog/', include('blog.urls')),
+    #api
+    path('api/reviews/', include('reviews.urls')), 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
