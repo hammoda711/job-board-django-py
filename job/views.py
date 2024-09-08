@@ -10,7 +10,7 @@ from .filters import JobFilter
 # Create your views here.
 
 
-
+#joblist
 def available_jobs(request):
     
     available_jobs = Job.objects.all()
