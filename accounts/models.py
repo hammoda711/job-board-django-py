@@ -12,14 +12,31 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=17)
     image = models.ImageField(upload_to='profile/')
 
+    
+    ROLE_CHOICES = [
+        ('Admin', 'Admin'),
+        ('Employer', 'Employer'),
+        ('Employee', 'Employee'),
+    ]
+    
+    
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    # Define USER_ROLES for use in forms
+    USER_ROLES = ROLE_CHOICES
+
     def __str__(self):
         return str(self.user)
+
 
 #django signal 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class City(models.Model):
     name = models.CharField(max_length=30)

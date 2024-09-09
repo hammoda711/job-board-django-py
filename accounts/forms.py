@@ -4,12 +4,19 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 class SignupForm(UserCreationForm):
+    role = forms.ChoiceField(choices=Profile.USER_ROLES, required=True)
     class Meta:
         model = User
         fields =['username','email','password1','password2']
+    
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+        return user
 
 
-# we choose to customize the user model by profile model so we need 2 forms
 # one for user model
 # one for the customized profile
 class UserForm(forms.ModelForm):
@@ -20,5 +27,5 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['city','phone_number','image']
+        fields = ['city','phone_number','image','role']
 

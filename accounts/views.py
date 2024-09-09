@@ -3,6 +3,8 @@ from django.urls import reverse
 from .forms import SignupForm,UserForm,ProfileForm
 from django.contrib.auth import authenticate, login,logout
 from .models import Profile
+
+
 # Create your views here.
 
 
@@ -12,14 +14,15 @@ def signup(request):
         
         if form.is_valid():
             
-            form.save()
+            user =form.save()
             
             #from Django's validation system.[cleaned_data[],authenticate()]
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username,password=password)
         
-            login(request,user)
+            if user is not None:
+                login(request, user)
 
             return redirect('/accounts/profile')
     else:
@@ -56,9 +59,3 @@ def profile_edit(request):
 
 
 
-'''
-def logout_view(request):
-    if request.method == 'GET':
-        logout(request)
-    return render(request, 'logged_out.html')
-'''    

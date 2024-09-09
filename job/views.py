@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .filters import JobFilter
-
+from .decorators import role_required
 # Create your views here.
 
 
@@ -58,6 +58,7 @@ def job_details(request,slug):
 
 
 @login_required
+@role_required('Employer')
 def add_job(request):
     if request.method == 'POST':
         form = PostJobForm(request.POST,request.FILES)
@@ -76,6 +77,7 @@ def add_job(request):
 
 
 @login_required
+@role_required('Employee')
 def apply_for_job(request, slug):
     job = get_object_or_404(Job, slug=slug)
 
